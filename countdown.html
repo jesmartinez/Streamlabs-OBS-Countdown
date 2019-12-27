@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Count</title>
+  </head>
+  <style media="screen">
+  @font-face {
+    font-family: Teko-Regular;
+    src: url(Teko-Regular.ttf);
+  }
+  *{
+    font-family: "Teko-Regular";
+    font-size: 100px;
+  }
+  </style>
+  <body>
+    <div id="count">
+      00:00
+    </div>
+  </body>
+  <script type="text/javascript">
+    let hash = window.location.hash.slice(1);
+    let globalSeconds = Number(hash);
+    function getCountTime(){
+      if(Number(globalSeconds)){
+        let seconds = globalSeconds;
+        let minutes = Math.floor(seconds / 60);
+        seconds = seconds - (minutes * 60);
+        globalSeconds--;
+        showCount(minutes, seconds);
+      }
+    }
+    function showCount(minutes, seconds){
+      let element = document.getElementById("count");
+      element.innerHTML = "";
+      if ((minutes+"").length < 2) {
+        element.innerHTML += "0";
+      }
+      element.innerHTML += minutes + ":";
+      if ((seconds+"").length < 2) {
+        element.innerHTML += "0";
+      }
+      element.innerHTML += seconds;
+    }
+    getCountTime();
+    setInterval(getCountTime, 1000);
+  </script>
+</html>
